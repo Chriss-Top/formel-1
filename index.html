@@ -8,31 +8,44 @@
 <body>
 <header><a class="brand" href="./index.html" aria-label="Formel Freunde Startseite"><span class="mark">ff<span>↗</span></span> FORMEL FREUNDE<span class="edition">LOCAL RACING CLUB</span></a><span class="live"><i></i> 2 SPIELER · 1 TASTATUR</span></header>
 <main>
-<section class="intro"><div><div class="eyebrow">GROSSE AUTOS. GROSSE FREUNDSCHAFT.</div><h1>Erst Rivalen.<br>Dann <em>Rennteam.</em></h1><p>Rad an Rad um die Kurve. Mit etwas Glück wird aus eurem<br class="desktop"> Duell ein Teamrennen gegen den Computer.</p></div><div class="race-label"><span id="circuit-code">01 / CLUB CIRCUIT</span><strong id="circuit-name">Die Freundschaftsrunde</strong><small>3 Runden <b>·</b> Zufälliger Team-Moment <b>·</b> Lokal zu zweit</small></div><div class="race-options"><label for="track-select">Strecke</label><select id="track-select"><option value="club">Freundschaftsrunde</option><option value="oval">Turbo-Oval</option><option value="coast">Küstenkurven</option></select><small>Streckenwechsel setzt das Rennen zurück.</small></div></section>
+<section class="intro"><div><div class="eyebrow">GROSSE AUTOS. GROSSE FREUNDSCHAFT.</div><h1>Erst Rivalen.<br>Dann <em>Rennteam.</em></h1><p>Rad an Rad um die Kurve. Mit etwas Glück wird aus eurem<br class="desktop"> Duell ein Teamrennen gegen den Computer.</p></div><div class="race-label"><span id="circuit-code">01 / CLUB CIRCUIT</span><strong id="circuit-name">Die Freundschaftsrunde</strong><small>3 Runden <b>·</b> 2 Loopings pro Strecke <b>·</b> Lokal zu zweit</small></div><div class="race-options"><label for="track-select">Strecke</label><select id="track-select"><option value="club">Looping-Garten</option><option value="oval">Schikanen-Arena</option><option value="coast">Küsten-Labyrinth</option></select><small>Streckenwechsel setzt das Rennen zurück.</small></div></section>
 <section class="race-layout">
 <div class="game-wrap"><div class="track-top"><span><i></i> <span id="track-name">CLUB CIRCUIT</span></span><span id="phase">BEREIT FÜR DIE STARTAUFSTELLUNG</span><button id="pause" aria-label="Rennen pausieren" disabled>Ⅱ</button></div><canvas id="game" width="1120" height="700" aria-label="Rennstrecke aus der Vogelperspektive"></canvas>
 <div class="overlay" id="overlay"><div class="flag">↗</div><div class="eyebrow" id="overlay-kicker">EURE STARTPLÄTZE SIND FREI</div><h2 id="overlay-title">Zwei Fahrer.<br>Eine große Runde.</h2><p id="overlay-description">Schnappt euch eine Tastatur und findet heraus,<br>wer von euch die Ideallinie trifft.</p><button class="primary" id="start">Motoren starten <span>→</span></button><small id="overlay-hint">3 Runden bis zum Ziel. Bereit?</small></div>
 <div class="track-bottom"><span id="message">● &nbsp; Berührung + etwas Glück = ein Team.</span><span id="timer">00:00.0</span></div></div>
-<aside><div class="panel-heading"><span>DAS STARTERFELD</span><span>02</span></div><div class="driver red"><div class="driver-top"><span class="number">01</span><span class="chip">SPIELER 1 · AM SCHNELLSTEN</span><span class="dot"></span></div><h3>Roter Blitz <span>↗</span></h3><div class="stats"><span>RUNDE <strong id="lap1">0 / 3</strong></span><span>POSITION <strong id="pos1">P1</strong></span></div><div class="controls"><div class="keys"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><p><b>W / S</b> Gas / Bremse<br><b>A / D</b> Lenken</p></div><label class="assist-option"><input type="checkbox" id="assist1"><span>Spur automatisch halten<small>Nur W / S: Gas und Bremse. Lenkt für dich.</small></span></label></div>
+<aside><div class="panel-heading"><span>DAS STARTERFELD</span><span id="car-count">02</span></div><div class="driver red"><div class="driver-top"><span class="number">01</span><span class="chip">SPIELER 1 · AM SCHNELLSTEN</span><span class="dot"></span></div><h3>Roter Blitz <span>↗</span></h3><div class="stats"><span>RUNDE <strong id="lap1">0 / 3</strong></span><span>POSITION <strong id="pos1">P1</strong></span></div><div class="controls"><div class="keys"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><p><b>W / S</b> Gas / Bremse<br><b>A / D</b> Lenken</p></div><label class="assist-option"><input type="checkbox" id="assist1"><span>Spur automatisch halten<small>Nur W / S: Gas und Bremse. Lenkt für dich.</small></span></label></div>
 <div class="driver blue"><div class="driver-top"><span class="number">02</span><span class="chip">SPIELER 2</span><span class="dot"></span></div><h3>Blauer Komet <span>↗</span></h3><div class="stats"><span>RUNDE <strong id="lap2">0 / 3</strong></span><span>POSITION <strong id="pos2">P2</strong></span></div><div class="controls"><div class="keys"><kbd>↑</kbd><div><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></div></div><p><b>↑ / ↓</b> Gas / Bremse<br><b>← / →</b> Lenken</p></div><label class="assist-option"><input type="checkbox" id="assist2"><span>Spur automatisch halten<small>Nur ↑ / ↓: Gas und Bremse. Lenkt für dich.</small></span></label></div>
-<div class="team-box" id="team-box"><span class="team-icon">✳</span><h3>Zusammen schneller.</h3><p>Bei einer Berührung habt ihr eine 50-%-Chance, ein Team zu werden. Dann startet ein blaues KI-Auto — deutlich langsamer als ihr beide!</p><div id="team-status">TEAM-MODUS NOCH NICHT AKTIV</div></div></aside>
+<div class="team-box" id="team-box"><span class="team-icon">✳</span><h3>Zusammen schneller.</h3><p>Erster Kontakt: 50 % Team-Chance. Weitere Kontakte: neue blaue Gegner. Hat euch ein Gegner überholt? Berührt ihn und Spieler 1 übernimmt ihn — mit denselben Tasten!</p><div id="team-status">TEAM-MODUS NOCH NICHT AKTIV</div></div></aside>
 </section><footer><span><b>SO WIRD GEFAHREN</b> &nbsp; Auf dem Asphalt bleiben. Kurven sauber nehmen. Freundschaften schließen.</span><span><kbd>P</kbd> Pause <span class="separator">/</span> <kbd>R</kbd> Neustart <button id="restart">↻ Zurück zum Start</button></span></footer>
 </main><script>
 'use strict';
 const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d');
 const $=id=>document.getElementById(id);
-const TAU=Math.PI*2,N=600,ROAD=102,keys=new Set();
+const TAU=Math.PI*2,N=900,ROAD=102,keys=new Set();
 const circuits={
- club:{name:'Die Freundschaftsrunde',code:'01 / CLUB CIRCUIT',label:'CLUB CIRCUIT',point:t=>({x:560+392*Math.cos(t)+29*Math.cos(3*t),y:350+225*Math.sin(t)+22*Math.sin(2*t)})},
- oval:{name:'Turbo-Oval',code:'02 / TURBO OVAL',label:'TURBO OVAL',point:t=>({x:560+405*Math.cos(t),y:350+228*Math.sin(t)})},
- coast:{name:'Küstenkurven',code:'03 / COAST CIRCUIT',label:'COAST CIRCUIT',point:t=>({x:560+375*Math.cos(t)+42*Math.cos(2*t),y:350+215*Math.sin(t)-35*Math.sin(2*t)})}
+ club:{name:'Looping-Garten',code:'01 / LOOP GARDEN',label:'LOOP GARDEN',loops:[100,360],point:t=>({x:560+(345+38*Math.cos(4*t))*Math.cos(t),y:350+(220+25*Math.cos(3*t))*Math.sin(t)})},
+ oval:{name:'Schikanen-Arena',code:'02 / CHICANE ARENA',label:'CHICANE ARENA',loops:[65,330],point:t=>({x:560+350*Math.cos(t)+32*Math.cos(3*t),y:350+205*Math.sin(t)+38*Math.sin(4*t)})},
+ coast:{name:'Küsten-Labyrinth',code:'03 / COAST MAZE',label:'COAST MAZE',loops:[145,410],point:t=>({x:560+330*Math.cos(t)+48*Math.cos(3*t),y:350+202*Math.sin(t)+40*Math.sin(3*t)})}
 };
-let circuit=circuits.club;
-let points=Array.from({length:N},(_,i)=>circuit.point(i/N*TAU));
+let circuit=circuits.club,loopSections=[];
+function buildTrack(){
+ const raw=[];
+ for(let i=0;i<600;i++){
+  const t=i/600*TAU,p=circuit.point(t);raw.push({...p,loop:0});
+  if(circuit.loops.includes(i)){
+   const next=circuit.point(t+.001),a=Math.atan2(next.y-p.y,next.x-p.x),radius=72;
+   for(let k=1;k<=140;k++){const u=k/140*TAU;raw.push({x:p.x+radius*(Math.cos(a)*Math.sin(u)-Math.sin(a)*(1-Math.cos(u))),y:p.y+radius*(Math.sin(a)*Math.sin(u)+Math.cos(a)*(1-Math.cos(u))),loop:circuit.loops.indexOf(i)+1});}
+  }
+ }
+ const lengths=[0];for(let i=1;i<=raw.length;i++){const a=raw[i-1],b=raw[i%raw.length];lengths.push(lengths[i-1]+Math.hypot(b.x-a.x,b.y-a.y));}
+ const result=[];let segment=0;for(let j=0;j<N;j++){const d=j/N*lengths.at(-1);while(lengths[segment+1]<d)segment++;const a=raw[segment],b=raw[(segment+1)%raw.length],f=(d-lengths[segment])/(lengths[segment+1]-lengths[segment]);result.push({x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f,loop:b.loop});}
+ loopSections=[1,2].map(id=>({id,indices:result.map((p,i)=>p.loop===id?i:-1).filter(i=>i>=0)}));return result;
+}
+let points=buildTrack();
 // Follow a lane by travelled distance, so throttle and brakes stay fully manual.
 function lanePoint(index,lane){const i=(index+N)%N,p=points[i],a=direction(i);return {x:p.x-Math.sin(a)*lane,y:p.y+Math.cos(a)*lane};}
 function moveOnLane(c,dt,lane){
- if(c.railPosition===null)c.railPosition=nearest(c.x,c.y).index;
+ if(c.railPosition===null)c.railPosition=nearest(c.x,c.y,c.index).index;
  let distance=c.speed*dt,pos=c.railPosition;
  while(Math.abs(distance)>0.00001){
   const forward=distance>0;const i=forward?Math.floor(pos):Math.ceil(pos)-1;
@@ -45,39 +58,57 @@ function moveOnLane(c,dt,lane){
  c.railPosition=pos;const i=Math.floor(pos),f=pos-i,a=lanePoint(i,lane),b=lanePoint((i+1)%N,lane);
  c.x=a.x+(b.x-a.x)*f;c.y=a.y+(b.y-a.y)*f;c.angle=Math.atan2(b.y-a.y,b.x-a.x);
 }
-function changeTrack(){circuit=circuits[$('track-select').value];points=Array.from({length:N},(_,i)=>circuit.point(i/N*TAU));$('circuit-name').textContent=circuit.name;$('circuit-code').textContent=circuit.code;$('track-name').textContent=circuit.label;reset();}
+function changeTrack(){circuit=circuits[$('track-select').value];points=buildTrack();$('circuit-name').textContent=circuit.name;$('circuit-code').textContent=circuit.code;$('track-name').textContent=circuit.label;reset();}
 
 function direction(i){const a=points[(i+N-1)%N],b=points[(i+1)%N];return Math.atan2(b.y-a.y,b.x-a.x);}
-function nearest(x,y){let best=Infinity,index=0;for(let i=0;i<N;i++){let d=(x-points[i].x)**2+(y-points[i].y)**2;if(d<best){best=d;index=i;}}return {index,distance:Math.sqrt(best)};}
-let cars=[],state='idle',team=false,elapsed=0,contactCooldown=0,last=0,flash=0;
-const START=450;
-function createCar(name,color,lane,index=START,maxSpeed=280){const p=points[index],a=direction(index);return {name,color,x:p.x-Math.sin(a)*lane,y:p.y+Math.cos(a)*lane,angle:a,speed:0,railPosition:null,maxSpeed,index,progress:0,lap:0,ai:false,finish:false};}
-function reset(){cars=[createCar('Roter Blitz','#e97759',-25,START,340),createCar('Blauer Komet','#79b5dc',25,START,280)];state='idle';team=false;elapsed=0;contactCooldown=0;flash=0;keys.clear();$('team-box').classList.remove('active');$('team-status').textContent='TEAM-MODUS NOCH NICHT AKTIV';$('message').textContent='●  Berührung + etwas Glück = ein Team.';$('phase').textContent='BEREIT FÜR DIE STARTAUFSTELLUNG';$('pause').disabled=true;$('pause').textContent='Ⅱ';$('overlay').classList.remove('hidden');$('overlay-kicker').textContent='EURE STARTPLÄTZE SIND FREI';$('overlay-title').innerHTML='Zwei Fahrer.<br>Eine große Runde.';$('overlay-description').innerHTML='Schnappt euch eine Tastatur und findet heraus,<br>wer von euch die Ideallinie trifft.';$('start').innerHTML='Motoren starten <span>→</span>';$('overlay-hint').textContent='3 Runden bis zum Ziel. Bereit?';updateUI();}
+function nearest(x,y,hint=null){let best=Infinity,index=0;const count=hint===null?N:71;for(let k=0;k<count;k++){const i=hint===null?k:(hint+k-35+N)%N;let d=(x-points[i].x)**2+(y-points[i].y)**2;if(d<best){best=d;index=i;}}return {index,distance:Math.sqrt(best)};}
+let cars=[],state='idle',team=false,elapsed=0,contactCooldown=0,last=0,flash=0,playersTouching=false;
+const START=675;
+function createCar(name,color,lane,index=START,maxSpeed=280){const p=points[index],a=direction(index);return {name,color,x:p.x-Math.sin(a)*lane,y:p.y+Math.cos(a)*lane,angle:a,speed:0,railPosition:null,maxSpeed,index,progress:0,lap:0,ai:false,controller:null,overtook:false,loopVisits:0,lastLoop:0,finish:false};}
+function reset(){cars=[createCar('Roter Blitz','#e97759',-25,START,340),createCar('Blauer Komet','#79b5dc',25,START,280)];cars[0].controller=0;cars[1].controller=1;state='idle';team=false;elapsed=0;contactCooldown=0;flash=0;playersTouching=false;keys.clear();$('team-box').classList.remove('active');$('team-status').textContent='TEAM-MODUS NOCH NICHT AKTIV';$('message').textContent='●  Berührung + etwas Glück = ein Team.';$('phase').textContent='BEREIT FÜR DIE STARTAUFSTELLUNG';$('pause').disabled=true;$('pause').textContent='Ⅱ';$('overlay').classList.remove('hidden');$('overlay-kicker').textContent='EURE STARTPLÄTZE SIND FREI';$('overlay-title').innerHTML='Zwei Fahrer.<br>Eine große Runde.';$('overlay-description').innerHTML='Schnappt euch eine Tastatur und findet heraus,<br>wer von euch die Ideallinie trifft.';$('start').innerHTML='Motoren starten <span>→</span>';$('overlay-hint').textContent='3 Runden bis zum Ziel. Bereit?';updateUI();}
 function start(){if(state==='paused'){resume();return;}reset();state='racing';$('overlay').classList.add('hidden');$('pause').disabled=false;$('phase').textContent='RENNEN LÄUFT · JEDER GEGEN JEDEN';}
 function pause(){if(state!=='racing')return;state='paused';keys.clear();$('overlay').classList.remove('hidden');$('overlay-kicker').textContent='KURZER BOXENSTOPP';$('overlay-title').textContent='Durchatmen.';$('overlay-description').textContent='Das Rennen wartet auf euch.';$('start').innerHTML='Weiterfahren <span>→</span>';$('overlay-hint').textContent='Oder drücke P.';$('pause').textContent='▶';}
 function resume(){state='racing';$('overlay').classList.add('hidden');$('pause').textContent='Ⅱ';last=performance.now();}
 function finish(winner){state='finished';$('pause').disabled=true;$('phase').textContent='ZIEL ERREICHT';$('overlay').classList.remove('hidden');$('overlay-kicker').textContent='DIE ZIELFLAGGE FÄLLT';$('overlay-title').textContent=team?(winner.ai?'Die KI gewinnt!':'Teamwork gewinnt!'):winner.name+' gewinnt!';$('overlay-description').textContent=team?(winner.ai?'Neue Runde, neue Chance. Zusammen schafft ihr das!':'Einer von euch hat die KI geschlagen. Euer Team holt den Pokal!'):'Drei Runden, volle Konzentration. Zeit für eine Revanche?';$('start').innerHTML='Revanche starten <span>→</span>';$('overlay-hint').textContent='Rennzeit: '+formatTime(elapsed);}
-function activateTeam(){team=true;flash=2;const lead=Math.max(...cars.map(c=>c.progress));const idx=(START+Math.floor(lead))%N;const ai=createCar('Computer','#438fd6',0,idx,145);ai.ai=true;ai.progress=lead;ai.lap=Math.floor(lead/N);cars.push(ai);$('team-box').classList.add('active');$('team-status').textContent='TEAM AKTIV · SCHLAGT DEN COMPUTER!';$('message').textContent='✳ Team gefunden! Ein Mensch vor der KI im Ziel = Teamsieg.';$('phase').textContent='TEAMRENNEN · IHR ZWEI GEGEN DIE KI';}
+function spawnOpponent(){
+ const lead=Math.max(...cars.filter(c=>!c.ai).map(c=>c.progress)),progress=lead-35;
+ const idx=((START+Math.floor(progress))%N+N)%N;
+ const ai=createCar('Computer '+(cars.filter(c=>c.ai).length+1),'#438fd6',0,idx,145);ai.ai=true;ai.progress=progress;ai.lap=Math.max(0,Math.floor(progress/N));cars.push(ai);
+ $('message').textContent='Ein weiteres blaues KI-Auto ist da! Überholende Gegner könnt ihr durch Berührung übernehmen.';
+}
+function activateTeam(){team=true;flash=2;spawnOpponent();$('team-box').classList.add('active');$('phase').textContent='TEAMRENNEN · SAMMELT EURE RENNFLOTTE!';}
+function captureOpponent(c){c.ai=false;c.controller=0;c.color=cars[0].color;c.maxSpeed=cars[0].maxSpeed;c.railPosition=null;c.name='Rote Verstärkung';$('message').textContent='Übernommen! Spieler 1 steuert jetzt '+cars.filter(c=>c.controller===0).length+' rote Autos mit W / A / S / D.';}
+
 function update(dt){elapsed+=dt;contactCooldown=Math.max(0,contactCooldown-dt);flash=Math.max(0,flash-dt);
  for(let n=0;n<cars.length;n++){
- const c=cars[n];const assisted=!c.ai&&$('assist'+(n+1)).checked;const near=nearest(c.x,c.y);const off=!assisted&&near.distance>ROAD/2-6;
- if(c.ai){const look=points[(near.index+17)%N];const desired=Math.atan2(look.y-c.y,look.x-c.x);let diff=Math.atan2(Math.sin(desired-c.angle),Math.cos(desired-c.angle));c.angle+=Math.max(-2.8*dt,Math.min(2.8*dt,diff));c.speed+=(c.maxSpeed-c.speed)*dt*2;}
- else{const up=keys.has(n===0?'KeyW':'ArrowUp'),down=keys.has(n===0?'KeyS':'ArrowDown');const turn=Number(keys.has(n===0?'KeyD':'ArrowRight'))-Number(keys.has(n===0?'KeyA':'ArrowLeft'));c.speed+=(up?175:down?-240:-Math.sign(c.speed)*65)*dt;if(!up&&!down&&Math.abs(c.speed)<5)c.speed=0;c.speed=Math.max(-65,Math.min(off?105:c.maxSpeed,c.speed));if(!assisted)c.angle+=turn*2.55*Math.min(1,Math.abs(c.speed)/85)*Math.sign(c.speed)*dt;}
- if(off)c.speed*=Math.pow(.33,dt);if(assisted){moveOnLane(c,dt,n===0?-25:25);}else{c.railPosition=null;c.x+=Math.cos(c.angle)*c.speed*dt;c.y+=Math.sin(c.angle)*c.speed*dt;}c.x=Math.max(14,Math.min(1106,c.x));c.y=Math.max(14,Math.min(686,c.y));
- const next=nearest(c.x,c.y);let delta=next.index-c.index;if(delta>N/2)delta-=N;if(delta<-N/2)delta+=N;
+ const c=cars[n],driver=c.controller;const assisted=c.ai||$('assist'+(driver+1)).checked;const near=nearest(c.x,c.y,c.index);const off=!assisted&&near.distance>ROAD/2-6;
+ if(c.ai){c.speed+=(c.maxSpeed-c.speed)*dt*2;}
+ else{const up=keys.has(driver===0?'KeyW':'ArrowUp'),down=keys.has(driver===0?'KeyS':'ArrowDown');const turn=Number(keys.has(driver===0?'KeyD':'ArrowRight'))-Number(keys.has(driver===0?'KeyA':'ArrowLeft'));c.speed+=(up?175:down?-240:-Math.sign(c.speed)*65)*dt;if(!up&&!down&&Math.abs(c.speed)<5)c.speed=0;c.speed=Math.max(-65,Math.min(off?105:c.maxSpeed,c.speed));if(!assisted)c.angle+=turn*2.55*Math.min(1,Math.abs(c.speed)/85)*Math.sign(c.speed)*dt;}
+ if(off)c.speed*=Math.pow(.33,dt);if(assisted){moveOnLane(c,dt,c.ai?0:driver===0?-25:25);}else{c.railPosition=null;c.x+=Math.cos(c.angle)*c.speed*dt;c.y+=Math.sin(c.angle)*c.speed*dt;}c.x=Math.max(14,Math.min(1106,c.x));c.y=Math.max(14,Math.min(686,c.y));
+ const next=assisted?{index:Math.floor(c.railPosition),distance:0}:nearest(c.x,c.y,c.index);let delta=next.index-c.index;if(delta>N/2)delta-=N;if(delta<-N/2)delta+=N;
  // Only count continuous forward travel on the road; shortcuts never earn a lap.
  if(Math.abs(delta)<30&&next.distance<ROAD/2+22)c.progress+=delta;
- c.index=next.index;c.lap=Math.max(0,Math.floor(c.progress/N));
+ if(points[next.index].loop&&points[next.index].loop!==c.lastLoop)c.loopVisits++;c.lastLoop=points[next.index].loop;c.index=next.index;c.lap=Math.max(0,Math.floor(c.progress/N));
  }
  const a=cars[0],b=cars[1],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);
- if(d<43&&contactCooldown===0){contactCooldown=2.5;if(!team){if(Math.random()<.5)activateTeam();else $('message').textContent='● Fast ein Team! Beim nächsten Kontakt gibt es eine neue Chance.';}const nx=d>0?dx/d:1,ny=d>0?dy/d:0;const separation=(43-d)/2+2;a.x-=nx*separation;a.y-=ny*separation;b.x+=nx*separation;b.y+=ny*separation;a.speed*=.75;b.speed*=.75;}
+ if(d<43&&!playersTouching&&contactCooldown===0){contactCooldown=2.5;if(!team){if(Math.random()<.5)activateTeam();else $('message').textContent='● Fast ein Team! Beim nächsten Kontakt gibt es eine neue Chance.';}else spawnOpponent();const nx=d>0?dx/d:1,ny=d>0?dy/d:0;const separation=(43-d)/2+2;a.x-=nx*separation;a.y-=ny*separation;b.x+=nx*separation;b.y+=ny*separation;a.speed*=.75;b.speed*=.75;}
+ playersTouching=d<43;
+ // Only an actual change from behind to ahead unlocks capture for that opponent.
+ for(const c of cars.filter(c=>c.ai)){
+  if(!c.behindPlayers)c.behindPlayers=[false,false];
+  for(let player=0;player<2;player++){
+   if(c.progress<cars[player].progress-2)c.behindPlayers[player]=true;
+   if(c.behindPlayers[player]&&c.progress>cars[player].progress+2)c.overtook=true;
+  }
+  if(c.overtook&&cars.some(other=>!other.ai&&Math.abs(c.progress-other.progress)<35&&Math.hypot(c.x-other.x,c.y-other.y)<43))captureOpponent(c);
+ }
  const finished=cars.filter(c=>c.progress>=N*3).sort((a,b)=>b.progress-a.progress);if(finished.length)finish(finished[0]);updateUI();
 }
 function formatTime(t){return String(Math.floor(t/60)).padStart(2,'0')+':'+(t%60).toFixed(1).padStart(4,'0');}
-function updateUI(){const order=[...cars].sort((a,b)=>b.progress-a.progress);cars.slice(0,2).forEach((c,i)=>{$('lap'+(i+1)).textContent=Math.min(c.lap,3)+' / 3';$('pos'+(i+1)).textContent='P'+(order.indexOf(c)+1);});$('timer').textContent=formatTime(elapsed);}
+function updateUI(){$('car-count').textContent=String(cars.length).padStart(2,'0');$('team-status').textContent=team?'SPIELER 1: '+cars.filter(c=>c.controller===0).length+' AUTOS · GEGNER: '+cars.filter(c=>c.ai).length:'TEAM-MODUS NOCH NICHT AKTIV';const order=[...cars].sort((a,b)=>b.progress-a.progress);cars.slice(0,2).forEach((c,i)=>{$('lap'+(i+1)).textContent=Math.min(c.lap,3)+' / 3';$('pos'+(i+1)).textContent='P'+(order.indexOf(c)+1);});$('timer').textContent=formatTime(elapsed);}
 function path(){ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();}
 function line(width,color,dash=[]){path();ctx.lineWidth=width;ctx.strokeStyle=color;ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([]);}
-function tree(x,y,r){ctx.fillStyle='#193e30';ctx.beginPath();ctx.arc(x+3,y+6,r,0,TAU);ctx.fill();ctx.fillStyle='#34583b';ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.fillStyle='#426344';ctx.beginPath();ctx.arc(x-4,y-4,r*.65,0,TAU);ctx.fill();}
+function tree(x,y,r){if(nearest(x,y).distance<ROAD/2+r+4)return;ctx.fillStyle='#193e30';ctx.beginPath();ctx.arc(x+3,y+6,r,0,TAU);ctx.fill();ctx.fillStyle='#34583b';ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.fillStyle='#426344';ctx.beginPath();ctx.arc(x-4,y-4,r*.65,0,TAU);ctx.fill();}
 function drawCar(c){
  ctx.save();ctx.translate(c.x,c.y);ctx.rotate(c.angle);ctx.scale(1.7,1.7);
  // Broad wings, four exposed tyres and a tapered Formula-style body.
@@ -94,10 +125,17 @@ function drawCar(c){
  ctx.fillStyle=c.ai?'#9fd7ff':'#ffe079';ctx.beginPath();ctx.arc(-4,0,4.2,0,TAU);ctx.fill();
  ctx.fillStyle='#fdf1c6';ctx.beginPath();ctx.arc(-5,-1,1.5,0,TAU);ctx.fill();
  ctx.fillStyle='#213d4c';ctx.beginPath();ctx.ellipse(-1.7,0,1.7,3,0,0,TAU);ctx.fill();
- ctx.restore();ctx.font='bold 11px sans-serif';ctx.textAlign='center';ctx.fillStyle=c.ai?'#bde3ff':'#f6f1d9';ctx.fillText(c.ai?'KI · LANGSAM':team?'TEAM '+(cars.indexOf(c)+1):'P'+(cars.indexOf(c)+1),c.x,c.y-37);
+ ctx.restore();ctx.font='bold 11px sans-serif';ctx.textAlign='center';ctx.fillStyle=c.ai?'#bde3ff':'#f6f1d9';ctx.fillText(c.ai?'KI · LANGSAM':c.controller===0&&cars.indexOf(c)>1?'P1 · VERSTÄRKUNG':'P'+(c.controller+1),c.x,c.y-37);
+}
+function drawLoopings(){
+ for(const section of loopSections){
+  ctx.save();ctx.strokeStyle='#e4ee9b';ctx.lineWidth=4;ctx.setLineDash([8,8]);ctx.beginPath();section.indices.forEach((i,n)=>{const p=points[i];n?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);});ctx.stroke();ctx.setLineDash([]);
+  const p=points[section.indices[Math.floor(section.indices.length/2)]];ctx.fillStyle='#d3ef77';ctx.font='bold 12px sans-serif';ctx.textAlign='center';ctx.fillText('↻ LOOPING '+section.id,p.x,p.y-20);ctx.restore();
+ }
 }
 function draw(){ctx.fillStyle='#284c37';ctx.fillRect(0,0,1120,700);ctx.fillStyle='#2d513b';for(let y=0;y<700;y+=42)for(let x=0;x<1120;x+=42){ctx.beginPath();ctx.arc(x+(y%84?21:0),y,1,0,TAU);ctx.fill();}
  line(ROAD+26,'#1c3d2e');line(ROAD+13,'#e4d9b8');line(ROAD+13,'#ce7659',[17,17]);line(ROAD,'#777e72');line(ROAD-8,'#6a746a');line(1,'#c0c3a1aa',[10,16]);
+ drawLoopings();
  for(const [x,y,r] of [[61,62,24],[103,85,18],[1040,57,25],[1073,101,18],[64,603,24],[113,647,19],[1045,615,26],[1002,650,17],[357,302,22],[733,378,24],[696,405,16],[400,423,17]])tree(x,y,r);
  ctx.save();const s=points[START],angle=direction(START);ctx.translate(s.x,s.y);ctx.rotate(angle);for(let i=0;i<10;i++)for(let j=0;j<3;j++){ctx.fillStyle=(i+j)%2?'#f2ebd1':'#33473a';ctx.fillRect(j*6-9,i*10-50,6,10);}ctx.restore();
  ctx.textAlign='center';ctx.fillStyle='#a7bf8d';ctx.font='bold 11px sans-serif';ctx.fillText('F O R M E L  F R E U N D E',560,323);ctx.fillStyle='#769565';ctx.font='italic bold 65px sans-serif';ctx.fillText(team?'TEAM':'ff ↗',560,384);ctx.font='9px sans-serif';ctx.fillStyle='#8ba67a';ctx.fillText(team?'ZUSAMMEN GEGEN DEN COMPUTER':circuit.label+'  /  EST. 2026',560,410);
@@ -108,7 +146,7 @@ function draw(){ctx.fillStyle='#284c37';ctx.fillRect(0,0,1120,700);ctx.fillStyle
 function frame(time){const dt=Math.min((time-last)/1000||0,.04);last=time;if(state==='racing')update(dt);draw();requestAnimationFrame(frame);}
 window.addEventListener('keydown',e=>{if(e.target.matches('select')||(e.code==='Space'&&e.target.matches('input,button')))return;if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();if(e.repeat)return;if(e.code==='KeyP'){if(state==='racing')pause();else if(state==='paused')resume();}else if(e.code==='KeyR')reset();else keys.add(e.code);});
 window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>{keys.clear();pause();});document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
-$('track-select').addEventListener('change',changeTrack);for(const n of [1,2])$('assist'+n).addEventListener('change',()=>{cars[n-1].railPosition=null;});
-$('start').addEventListener('click',start);$('restart').addEventListener('click',reset);$('pause').addEventListener('click',()=>state==='paused'?resume():pause());reset();requestAnimationFrame(frame);
+$('track-select').addEventListener('change',changeTrack);for(const n of [1,2])$('assist'+n).addEventListener('change',()=>{cars.filter(c=>c.controller===n-1).forEach(c=>c.railPosition=null);});
+$('start').addEventListener('click',start);$('restart').addEventListener('click',reset);$('pause').addEventListener('click',()=>state==='paused'?resume():pause());changeTrack();requestAnimationFrame(frame);
 
 </script></body></html>
