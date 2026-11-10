@@ -15,7 +15,7 @@
 <div class="track-bottom"><span id="message">● &nbsp; Berührung + etwas Glück = ein Team.</span><span id="timer">00:00.0</span></div></div>
 <aside><div class="panel-heading"><span>DAS STARTERFELD</span><span id="car-count">02</span></div><div class="driver red"><div class="driver-top"><span class="number">01</span><span class="chip">SPIELER 1 · AM SCHNELLSTEN</span><span class="dot"></span></div><h3>Roter Blitz <span>↗</span></h3><div class="stats"><span>RUNDE <strong id="lap1">0 / 3</strong></span><span>POSITION <strong id="pos1">P1</strong></span></div><div class="controls"><div class="keys"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><p><b>W / S</b> Gas / Bremse<br><b>A / D</b> Lenken</p></div><label class="assist-option"><input type="checkbox" id="assist1"><span>Spur automatisch halten<small>Nur W / S: Gas und Bremse. Lenkt für dich.</small></span></label></div>
 <div class="driver blue"><div class="driver-top"><span class="number">02</span><span class="chip">SPIELER 2</span><span class="dot"></span></div><h3>Blauer Komet <span>↗</span></h3><div class="stats"><span>RUNDE <strong id="lap2">0 / 3</strong></span><span>POSITION <strong id="pos2">P2</strong></span></div><div class="controls"><div class="keys"><kbd>↑</kbd><div><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></div></div><p><b>↑ / ↓</b> Gas / Bremse<br><b>← / →</b> Lenken</p></div><label class="assist-option"><input type="checkbox" id="assist2"><span>Spur automatisch halten<small>Nur ↑ / ↓: Gas und Bremse. Lenkt für dich.</small></span></label></div>
-<div class="team-box" id="team-box"><span class="team-icon">✳</span><h3>Zusammen schneller.</h3><p>Erster Kontakt: 50 % Team-Chance. Weitere Kontakte: neue blaue Gegner. Hat euch ein Gegner überholt? Berührt ihn und Spieler 1 übernimmt ihn — mit denselben Tasten!</p><div id="team-status">TEAM-MODUS NOCH NICHT AKTIV</div></div></aside>
+<div class="team-box" id="team-box"><span class="team-icon">✳</span><h3>Zusammen schneller.</h3><p>Erster Kontakt: 50 % Team-Chance. Weitere Kontakte: neue blaue Gegner. Hat euch ein Gegner überholt? Berührt ihn und Spieler 2 übernimmt ihn — mit denselben Tasten!</p><div id="team-status">TEAM-MODUS NOCH NICHT AKTIV</div></div></aside>
 </section><footer><span><b>SO WIRD GEFAHREN</b> &nbsp; Auf dem Asphalt bleiben. Kurven sauber nehmen. Freundschaften schließen.</span><span><kbd>P</kbd> Pause <span class="separator">/</span> <kbd>R</kbd> Neustart <button id="restart">↻ Zurück zum Start</button></span></footer>
 </main><script>
 'use strict';
@@ -77,7 +77,7 @@ function spawnOpponent(){
  $('message').textContent='Ein weiteres blaues KI-Auto ist da! Überholende Gegner könnt ihr durch Berührung übernehmen.';
 }
 function activateTeam(){team=true;flash=2;spawnOpponent();$('team-box').classList.add('active');$('phase').textContent='TEAMRENNEN · SAMMELT EURE RENNFLOTTE!';}
-function captureOpponent(c){c.ai=false;c.controller=0;c.color=cars[0].color;c.maxSpeed=cars[0].maxSpeed;c.railPosition=null;c.name='Rote Verstärkung';$('message').textContent='Übernommen! Spieler 1 steuert jetzt '+cars.filter(c=>c.controller===0).length+' rote Autos mit W / A / S / D.';}
+function captureOpponent(c){c.ai=false;c.controller=1;c.color=cars[1].color;c.maxSpeed=cars[1].maxSpeed;c.railPosition=null;c.name='Blaue Verstärkung';$('message').textContent='Übernommen! Spieler 2 steuert jetzt '+cars.filter(c=>c.controller===1).length+' blaue Autos mit den Pfeiltasten.';}
 
 function update(dt){elapsed+=dt;contactCooldown=Math.max(0,contactCooldown-dt);flash=Math.max(0,flash-dt);
  for(let n=0;n<cars.length;n++){
@@ -105,7 +105,7 @@ function update(dt){elapsed+=dt;contactCooldown=Math.max(0,contactCooldown-dt);f
  const finished=cars.filter(c=>c.progress>=N*3).sort((a,b)=>b.progress-a.progress);if(finished.length)finish(finished[0]);updateUI();
 }
 function formatTime(t){return String(Math.floor(t/60)).padStart(2,'0')+':'+(t%60).toFixed(1).padStart(4,'0');}
-function updateUI(){$('car-count').textContent=String(cars.length).padStart(2,'0');$('team-status').textContent=team?'SPIELER 1: '+cars.filter(c=>c.controller===0).length+' AUTOS · GEGNER: '+cars.filter(c=>c.ai).length:'TEAM-MODUS NOCH NICHT AKTIV';const order=[...cars].sort((a,b)=>b.progress-a.progress);cars.slice(0,2).forEach((c,i)=>{$('lap'+(i+1)).textContent=Math.min(c.lap,3)+' / 3';$('pos'+(i+1)).textContent='P'+(order.indexOf(c)+1);});$('timer').textContent=formatTime(elapsed);}
+function updateUI(){$('car-count').textContent=String(cars.length).padStart(2,'0');$('team-status').textContent=team?'SPIELER 2: '+cars.filter(c=>c.controller===1).length+' AUTOS · GEGNER: '+cars.filter(c=>c.ai).length:'TEAM-MODUS NOCH NICHT AKTIV';const order=[...cars].sort((a,b)=>b.progress-a.progress);cars.slice(0,2).forEach((c,i)=>{$('lap'+(i+1)).textContent=Math.min(c.lap,3)+' / 3';$('pos'+(i+1)).textContent='P'+(order.indexOf(c)+1);});$('timer').textContent=formatTime(elapsed);}
 function path(){ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();}
 function line(width,color,dash=[]){path();ctx.lineWidth=width;ctx.strokeStyle=color;ctx.setLineDash(dash);ctx.stroke();ctx.setLineDash([]);}
 function tree(x,y,r){if(nearest(x,y).distance<ROAD/2+r+4)return;ctx.fillStyle='#193e30';ctx.beginPath();ctx.arc(x+3,y+6,r,0,TAU);ctx.fill();ctx.fillStyle='#34583b';ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.fillStyle='#426344';ctx.beginPath();ctx.arc(x-4,y-4,r*.65,0,TAU);ctx.fill();}
@@ -125,7 +125,7 @@ function drawCar(c){
  ctx.fillStyle=c.ai?'#9fd7ff':'#ffe079';ctx.beginPath();ctx.arc(-4,0,4.2,0,TAU);ctx.fill();
  ctx.fillStyle='#fdf1c6';ctx.beginPath();ctx.arc(-5,-1,1.5,0,TAU);ctx.fill();
  ctx.fillStyle='#213d4c';ctx.beginPath();ctx.ellipse(-1.7,0,1.7,3,0,0,TAU);ctx.fill();
- ctx.restore();ctx.font='bold 11px sans-serif';ctx.textAlign='center';ctx.fillStyle=c.ai?'#bde3ff':'#f6f1d9';ctx.fillText(c.ai?'KI · LANGSAM':c.controller===0&&cars.indexOf(c)>1?'P1 · VERSTÄRKUNG':'P'+(c.controller+1),c.x,c.y-37);
+ ctx.restore();ctx.font='bold 11px sans-serif';ctx.textAlign='center';ctx.fillStyle=c.ai?'#bde3ff':'#f6f1d9';ctx.fillText(c.ai?'KI · LANGSAM':c.controller===1&&cars.indexOf(c)>1?'P2 · VERSTÄRKUNG':'P'+(c.controller+1),c.x,c.y-37);
 }
 function drawLoopings(){
  for(const section of loopSections){
